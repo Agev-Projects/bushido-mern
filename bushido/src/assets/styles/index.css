@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-secondary-500;
+}
+
+.btn-primary {
+  @apply bg-primary-400 rounded text-white font-bold hover:bg-primary-300 transition-all ease-linear duration-200;
+}
+
+.btn-secondary {
+  @apply bg-black bg-opacity-50 rounded text-white font-semibold border-white border hover:bg-white hover:text-black transition-all ease-linear duration-200;
+}
+
+.btn-add {
+  @apply bg-black bg-opacity-50 text-white border-white border hover:bg-white hover:text-black transition-all ease-linear duration-200;
+}
+
+.tra {
+  @apply transition-all ease-linear duration-300;
+}
+
+.profile {
+  @apply rounded-full w-full h-full object-cover z-20;
+}
+
+.tabs {
+  @apply text-white text-4xl font-custom mr-8 border-solid border-white border-b-4 border-opacity-0 hover:text-primary-400 hover:border-primary-400 hover:border-opacity-100;
+}
+
+.tabs-active {
+  @apply text-primary-400 text-4xl font-custom mr-8 border-solid border-b-4 border-opacity-100 border-primary-400;
+}
+
+.hero-active {
+  @apply relative opacity-100;
+}
+
+.hero {
+  @apply absolute top-0 invisible opacity-0;
+}
+
+.dot {
+  @apply bg-secondary-300 border-2 border-secondary-300 rounded-full cursor-pointer p-2 mr-2;
+}
+
+.dot-active {
+  @apply bg-primary-400 border-2 border-secondary-300 rounded-full cursor-pointer p-2 mr-2;
+}
+
+.card {
+  @apply rounded-lg text-white text-xl col-span-1 transform transition-all duration-500 hover:scale-110;
+}
+.card-img {
+  @apply rounded-lg object-cover border-4 border-opacity-0 hover:border-opacity-100;
+}
