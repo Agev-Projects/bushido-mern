@@ -55,7 +55,7 @@ Built with / Creado con / Criado com
 - [GraphQL](https://graphql.org)
 - [TailwindCSS](https://tailwindcss.com)
 
-### Incoming Features
+## Incoming Features
 
 Incoming Features:
 
