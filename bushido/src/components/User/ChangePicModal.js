@@ -39,7 +39,7 @@ const ChangePicModal = (props) => {
         className="fixed w-screen h-screen bg-black bg-opacity-60 z-30"
       ></div>
       <div
-        className={`fixed transform translate-x-${props.position.x} translate-y-${props.position.y} shadow-lg-white bg-secondary-300 rounded-lg w-1/3 h-3/4 z-50`}
+        className={isSign ? `fixed transform translate-x-0 translate-y-0 shadow-lg-white bg-secondary-300 rounded-lg w-1/3 h-3/4 z-50` : `fixed transform translate-x-full translate-y-8 shadow-lg-white bg-secondary-300 rounded-lg w-1/3 h-3/4 z-50`}
       >
         <div className="flex justify-between p-4">
           <p className="text-primary-400 text-2xl font-custom">

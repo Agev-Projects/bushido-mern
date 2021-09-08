@@ -102,7 +102,6 @@ const HomeNav = () => {
       {modal && (
         <ChangePicModal
           open={setModal}
-          position={{ x: "full", y: "8" }}
           sign={false}
         />
       )}

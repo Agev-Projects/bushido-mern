@@ -133,7 +133,6 @@ const SignPage = () => {
         <ChangePicModal
           open={setIsOpen}
           setPic={setProfilePic}
-          position={{ x: "0", y: "0" }}
           sign={true}
         />
       )}
