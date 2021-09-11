@@ -16,24 +16,28 @@ const LandingPage = () => {
   return (
     <React.Fragment>
       <LandingHeader />
-      <main className="h-full mx-auto">
-        <div className="relative mb-8">
-          <img src={landingImg} alt="bushidoLanding" className=""></img>
+      <main className="flex flex-col items-center">
+        <div className="relative h-96 lg:h-screen mb-8">
+          <img
+            src={landingImg}
+            alt="bushidoLanding"
+            className="object-cover h-full xs:h-auto w-full"
+          ></img>
 
-          <div className="absolute bottom-48 ml-4">
+          <div className="absolute top-20 lg:top-100 ml-4">
             <img
               src={bushidologo}
               alt="bushido logo"
               className="w-64 h-auto"
             ></img>
 
-            <h1 className="text-white text-4xl font-semibold font-custom w-3/5 ml-4">
+            <h1 className="text-white text-2xl lg:text-4xl font-semibold font-custom w-3/5 ml-4">
               {t("welcome")}
             </h1>
 
             <div className="flex ml-4 mt-12 mb-8 pt-8">
               <Link to="/signup">
-                <button className="btn-primary text-lg w-96 h-16">
+                <button className="btn-primary text-lg w-48 sm:w-96 h-16">
                   {t("register")}!
                 </button>
               </Link>
@@ -41,8 +45,8 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className="flex items-center mt-64">
-          <div className="ml-4">
+        <div className="flex flex-col lg:flex-row items-center mt-64">
+          <div className="px-4 lg:px-0 mb-12 lg:ml-4">
             <h2 className="text-white text-4xl text-semibold font-custom">
               {t("welcome_enjoy")}
             </h2>
@@ -52,7 +56,7 @@ const LandingPage = () => {
           </div>
           <img src={tv} alt="Anime on TV" width="640" height="480"></img>
         </div>
-        <div className="flex items-center mt-64">
+        <div className="flex flex-col lg:flex-row  items-center mb-64 lg:mb-0 mt-64">
           <img
             src={mangacover}
             alt="Manga on Monitor"

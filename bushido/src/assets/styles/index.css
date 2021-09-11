@@ -58,3 +58,7 @@ body {
 .card-img {
   @apply rounded-lg object-cover border-4 border-opacity-0 hover:border-opacity-100;
 }
+
+.centered-loader {
+  @apply flex flex-col justify-center items-center min-h-screen;
+}

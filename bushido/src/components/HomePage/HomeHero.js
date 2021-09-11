@@ -9,6 +9,7 @@ import GET_MANGAS_HERO from "../../graphql/Queries/getMangasHero.js";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import InfoIcon from "@material-ui/icons/Info";
+import Loading from "../States/Loading";
 
 const HomeHero = (props) => {
   const [slideIndex, setSlideIndex] = useState(1);
@@ -30,7 +31,12 @@ const HomeHero = (props) => {
     return () => clearTimeout(autoSlider);
   }, [slideIndex]);
 
-  if (loading || loadingM) return <div>Loading...</div>;
+  if (loading || loadingM)
+    return (
+      <div className="centered-loader">
+        <Loading stroke="#EA2C59" />
+      </div>
+    );
   if (error || errorM) return <div>An Error has ocurred</div>;
   const contentData = isAnime ? data.animes_hero : dataM.mangas_hero;
   const lang = cookies.get("i18next") || "en";
@@ -56,7 +62,7 @@ const HomeHero = (props) => {
           );
         })}
 
-        <div className="absolute z-20 bottom-10 right-10 flex ">
+        <div className="absolute z-20 bottom-0 right-0 sm:bottom-10  sm:right-10 flex ">
           {Array.from({ length: 3 }).map((x, index) => (
             <div
               key={index}
@@ -85,33 +91,33 @@ const HeroContent = ({
   const { t } = useTranslation();
   return (
     <React.Fragment>
-      <div className={`w-full h-screen-70 ${position} tra`}>
+      <div className={`w-full h-screen-70 ${position} tra relative`}>
         <div className="absolute top-0 left-0 bg-gradient-to-t from-secondary-500 to-transparent w-full h-full"></div>
         <img
           src={image}
           alt="featured anime"
-          className="w-full h-full object-cover z-0"
+          className=" w-screen xs:w-full h-full xs:object-cover z-0"
         ></img>
         <div
           title="info"
-          className="absolute top-40 left-10 w-1/3 flex flex-col"
+          className="absolute transform -translate-y-16 sm:-translate-y-0 top-40 left-10 w-1/2 sm:w-1/3 flex flex-col"
         >
           <img
             src={imageTitle}
             alt="anime title"
-            className="w-3/5 h-auto pb-1"
+            className="w-7/12 lg:w-3/5 h-auto pb-1"
           ></img>
           <div
             title="description"
-            className="font-custom font-bold text-sm text-white"
+            className="font-custom font-bold text-xs lg:text-sm text-white"
           >
             <span className="inline">{description}</span>
           </div>
-          <div title="buttons" className="mt-4 flex">
+          <div title="buttons" className="mt-4 sm:flex">
             <Link to={content ? `/watch/${info}` : `/manga/${info}`}>
-              <button className="btn-primary w-auto px-4 h-10 mr-4 flex items-center justify-center">
+              <button className="btn-primary w-3/4 text-xs sm:text-base sm:w-auto px-4 h-10 mb-4 sm:mb-0 mr-4 flex items-center justify-center">
                 {content ? (
-                  <PlayArrowIcon />
+                  <PlayArrowIcon className="text-xs sm:text-base" />
                 ) : (
                   <ImportContactsIcon className="pr-2" />
                 )}{" "}
@@ -119,7 +125,7 @@ const HeroContent = ({
               </button>
             </Link>
             <Link to={`/${content ? "anime" : "manga"}/${info}`}>
-              <button className="btn-secondary text-sm w-auto px-2 h-10 flex items-center justify-center">
+              <button className="btn-secondary text-xs lg:text-base w-auto px-2 h-10 flex items-center justify-center">
                 <InfoIcon /> <span className="px-1">{t("more_button")}</span>
               </button>
             </Link>

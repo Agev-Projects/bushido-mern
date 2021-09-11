@@ -1,30 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@apollo/client";
 import cookies from "js-cookie";
 import { Link } from "react-router-dom";
 
+import SearchContent from "./SearchContent.js";
+
 import GET_ANIMES from "../../graphql/Queries/getAnimes.js";
 import GET_MANGAS from "../../graphql/Queries/getMangas.js";
+import GET_ANIME_SEARCH from "../../graphql/Queries/getAnimeSearch.js";
+import GET_MANGA_SEARCH from "../../graphql/Queries/getMangaSearch.js";
 
 import SearchIcon from "@material-ui/icons/Search";
+import Loading from "../States/Loading";
 
 const lang = cookies.get("i18next") || "en";
 
 const HomeContent = (props) => {
   const { t } = useTranslation();
   const isAnime = props.content;
+  const [search, setSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const handleClick_anime = () => {
     props.setContent(true);
+    setSearch(false);
   };
   const handleClick_manga = () => {
     props.setContent(false);
+    setSearch(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (searchValue === "" || searchValue.trim() === "") {
+      return setSearch(false);
+    }
+    setSearch(true);
   };
 
   return (
-    <main className=" grid grid-cols-5 auto-rows-auto justify-center gap-12 px-8 mb-6">
-      <div className="col-start-1 col-end-2 text-white flex items-end ml-12">
+    <main className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 auto-rows-auto justify-center gap-12 px-8 mb-6">
+      <div className="hidden md:flex col-start-1 col-end-2 text-white items-end md:ml-0 lg:ml-12">
         <select
           name="genres"
           className="rounded w-32 h-8 bg-secondary-400 border-2 border-primary-400"
@@ -36,7 +53,7 @@ const HomeContent = (props) => {
           <option value="Comedy">Comedy</option>
         </select>
       </div>
-      <div className="col-start-2 col-end-5 py-8 flex items-start justify-center">
+      <div className="col-start-1 col-end-3 md:col-start-2 md:col-end-3 lg:col-start-2 lg:col-end-5 py-8 flex items-start justify-center">
         <button
           onClick={handleClick_anime}
           className={isAnime ? "tabs-active" : "tabs"}
@@ -51,19 +68,46 @@ const HomeContent = (props) => {
         </button>
       </div>
 
-      <form className="col-start-5 col-end-6 mr-4 flex items-end justify-end">
+      <form
+        className="fixed top-5 z-50 right-0 sm:right-10 md:z-0 md:static flex md:col-start-3 md:col-end-4 lg:col-start-5 lg:col-end-6 mr-4 items-end lg:justify-end"
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <input
           type="search"
           placeholder={t("search_anime")}
-          className="w-60 h-8 px-1 bg-secondary-400 text-white rounded rounded-r-none outline-none border-t-2 border-b-2 border-l-2 border-primary-400"
+          className=" w-24 xs:w-32 md:ml-6 lg:w-60 h-8 px-1 bg-secondary-400 text-white rounded rounded-r-none outline-none border-t-2 border-b-2 border-l-2 border-primary-400"
+          onChange={(e) => setSearchValue(e.target.value)}
         ></input>
-        <button className="bg-primary-400 rounded text-white font-bold hover:bg-primary-300 transition-all ease-linear duration-200 rounded-l-none px-4 h-8">
+        <button
+          type="submit"
+          className="bg-primary-400 rounded text-white font-bold hover:bg-primary-300 transition-all ease-linear duration-200 rounded-l-none px-4 h-8"
+        >
           <SearchIcon fontSize="small" />
         </button>
       </form>
 
-      {isAnime && <AnimeContent />}
-      {!isAnime && <MangaContent />}
+      {isAnime && !search && <AnimeContent />}
+      {!isAnime && !search && <MangaContent />}
+      {search && isAnime && (
+        <SearchContent
+          query={GET_ANIME_SEARCH}
+          content="anime"
+          search={setSearch}
+          searchContent={searchValue}
+          setSearchContent={setSearchValue}
+          type="anime_search"
+        />
+      )}
+      {search && !isAnime && (
+        <SearchContent
+          query={GET_MANGA_SEARCH}
+          content="manga"
+          search={setSearch}
+          searchContent={searchValue}
+          setSearchContent={setSearchValue}
+          type="manga_search"
+        />
+      )}
     </main>
   );
 };
@@ -71,7 +115,12 @@ const HomeContent = (props) => {
 const AnimeContent = () => {
   const { loading, error, data } = useQuery(GET_ANIMES);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="centered-loader">
+        <Loading stroke="#EA2C59" />
+      </div>
+    );
   if (error) return <div>An Error has ocurred</div>;
 
   const animeData = data.animes;
@@ -94,7 +143,12 @@ const AnimeContent = () => {
 const MangaContent = () => {
   const { loading, error, data } = useQuery(GET_MANGAS);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="centered-loader">
+        <Loading stroke="#EA2C59" />
+      </div>
+    );
   if (error) return <div>An Error has ocurred</div>;
 
   const mangaData = data.mangas;

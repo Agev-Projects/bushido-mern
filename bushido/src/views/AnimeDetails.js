@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
+import { useMediaQuery } from "@material-ui/core";
 
 import GET_ANIME_SLUG from "../graphql/Queries/getAnimeSlug.js";
 import GET_LISTS from "../graphql/Queries/getLists.js";
@@ -10,15 +11,18 @@ import ADD_ANIME from "../graphql/Mutations/addAnime.js";
 import REMOVE_ANIME from "../graphql/Mutations/removeAnime.js";
 
 import HomeNav from "../components/HomePage/HomeNav";
+import HomeNavResponsive from "../components/HomePage/HomeNavResponsive";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import AddIcon from "@material-ui/icons/Add";
 import CheckIcon from "@material-ui/icons/Check";
 import LabelIcon from "@material-ui/icons/Label";
+import Loading from "../components/States/Loading";
 
 const AnimeDetails = () => {
   const { slug } = useParams();
   const { t } = useTranslation();
   const [added, setAdded] = useState(false);
+  const isResponsive = useMediaQuery("(max-width:765px)");
   const { loading, error, data } = useQuery(GET_ANIME_SLUG, {
     variables: { slug },
   });
@@ -43,7 +47,12 @@ const AnimeDetails = () => {
       return <div>An Error has ocurred</div>;
     }
     if (data) {
-      if (loadingList) return <div>Loading...</div>;
+      if (loadingList)
+        return (
+          <div className="centered-loader">
+            <Loading stroke="#EA2C59" />
+          </div>
+        );
       if (errorList) return <div>An Error has ocurred</div>;
       if (dataList) {
         let list = dataList.animelist.filter((value) => {
@@ -59,7 +68,12 @@ const AnimeDetails = () => {
     }
   }, [dataList, loadingList, errorList]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="centered-loader">
+        <Loading stroke="#EA2C59" />
+      </div>
+    );
   if (error) return <div>An Error has ocurred</div>;
 
   const animeData = data.anime_slug;
@@ -94,7 +108,7 @@ const AnimeDetails = () => {
 
   return (
     <React.Fragment>
-      <HomeNav />
+      {isResponsive ? <HomeNavResponsive /> : <HomeNav />}
       <div className="w-full h-screen-70 relative">
         <div className="absolute top-0 left-0 bg-gradient-to-t from-secondary-500 to-transparent w-full h-full"></div>
         <img
@@ -102,15 +116,19 @@ const AnimeDetails = () => {
           alt="featured anime"
           className="w-full h-full object-cover z-0"
         ></img>
-        <div className="absolute top-36 left-10 w-1/2 flex flex-col">
-          <img src={animeData.imageTitle} alt="title" className="w-1/2" />
+        <div className="absolute top-36 left-10 w-3/4 sm:w-1/2 flex flex-col">
+          <img
+            src={animeData.imageTitle}
+            alt="title"
+            className="w-3/4 sm:w-1/2"
+          />
 
           <ul className="flex ml-4">
             {animeData.genres[lang].map((genre) => {
               return (
                 <li
                   key={genre}
-                  className="text-white font-custom text-semibold  mr-4 flex align-center"
+                  className="text-white font-custom text-sm sm:text-base sm:text-semibold  mr-4 flex align-center"
                 >
                   <LabelIcon className="text-primary-400" /> {genre}
                 </li>
@@ -118,7 +136,7 @@ const AnimeDetails = () => {
             })}
           </ul>
 
-          <p className="text-white font-custom">
+          <p className=" text-white font-custom mt-2 sm:mt-0 text-xs sm:text-base">
             {animeData.descriptions[lang]}
           </p>
 
@@ -139,7 +157,7 @@ const AnimeDetails = () => {
       </div>
 
       <div className="flex">
-        <div className="card w-1/5 ml-6 my-6">
+        <div className="card w-1/2 xs:w-1/3 lg:w-1/5 ml-6 my-6">
           <Link to={`/watch/${animeData.slug}`}>
             <img
               src={animeData.trailerImage}

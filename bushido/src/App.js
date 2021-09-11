@@ -14,10 +14,19 @@ import AnimeDetails from "./views/AnimeDetails.js";
 import MangaDetails from "./views/MangaDetails.js";
 import Watch from "./views/Watch";
 
+//Loading
+import Loading from "./components/States/Loading";
+
 function App() {
   return (
     <Router>
-      <Suspense fallback={<div> </div>}>
+      <Suspense
+        fallback={
+          <div className="centered-loader">
+            <Loading stroke="#EA2C59" />
+          </div>
+        }
+      >
         <Switch>
           <AuthContextProvider>
             <PrivateRoute path="/home" component={HomePage} />

@@ -40,18 +40,21 @@ const LandingHeader = () => {
         }
       ></img>
 
-      <div className="mr-4">
+      <div className=" mr-0 sm:mr-4">
         <Link
           to="/signup"
           className={
             navScroll
-              ? "btn-primary text-lg mr-4 py-2 px-4 tra"
-              : "btn-primary text-lg mr-4 py-2 px-4 opacity-0 invisible tra"
+              ? "btn-primary text-xs px-2 xs:text-lg mr-4 py-2 xs:px-4 tra"
+              : "btn-primary text-xs px-2 xs:text-lg mr-4 py-2 xs:px-4 opacity-0 invisible tra"
           }
         >
           {t("register")}
         </Link>
-        <Link to="/login" className="btn-secondary text-base mr-5 py-3 px-6">
+        <Link
+          to="/login"
+          className="btn-secondary text-base mr-0 sm:mr-5 py-3 px-6"
+        >
           {t("login")}
         </Link>
       </div>

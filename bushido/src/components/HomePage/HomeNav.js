@@ -15,16 +15,13 @@ const HomeNav = () => {
   const [modal, setModal] = useState(false);
   const { user, setUser } = useContext(AuthContext);
   const { t } = useTranslation();
+
   const handleScroll = () => {
     if (window.scrollY >= 400) {
       setNavScroll(true);
     } else {
       setNavScroll(false);
     }
-  };
-
-  const handleMouseOver = () => {
-    setHoverProfile(true);
   };
 
   useEffect(() => {
@@ -76,11 +73,12 @@ const HomeNav = () => {
           </div>
 
           <div
-            onMouseOver={handleMouseOver}
+            onMouseOver={() => setHoverProfile(true)}
             className="relative rounded-full text-white mr-12 flex items-center justify-center w-12 h-12"
           >
             <img
               src={user.user.profilePic}
+              onClick={() => setHoverProfile(!hoverProfile)}
               alt="Profile"
               className={
                 hoverProfile
@@ -99,12 +97,7 @@ const HomeNav = () => {
           </div>
         </nav>
       </header>
-      {modal && (
-        <ChangePicModal
-          open={setModal}
-          sign={false}
-        />
-      )}
+      {modal && <ChangePicModal open={setModal} sign={false} />}
     </React.Fragment>
   );
 };

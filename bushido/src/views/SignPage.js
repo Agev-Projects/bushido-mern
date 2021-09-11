@@ -8,6 +8,7 @@ import landingImg from "../assets/images/banner.png";
 import bushidologo from "../assets/images/bushidologo.png";
 import ChangePicModal from "../components/User/ChangePicModal";
 import GET_USER from "../graphql/Queries/getUser";
+import Loading from "../components/States/Loading";
 
 const SignPage = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ const SignPage = () => {
     "https://i.ibb.co/nsKb6XV/default-picture.jpg"
   );
   const [isOpen, setIsOpen] = useState(false);
-  const [signup, { error, data }] = useMutation(SIGNUP, {
+  const [signup, { loading, error, data }] = useMutation(SIGNUP, {
     errorPolicy: "ignore",
     refetchQueries: [GET_USER, "getUser"],
   });
@@ -54,28 +55,28 @@ const SignPage = () => {
       <img
         src={landingImg}
         alt="bushidoLanding"
-        className="absolute w-full h-full z-0"
+        className="absolute top-0 object-cover lg:w-full h-auto lg:h-full z-0"
       ></img>
       <Link to="/">
         <img
           src={bushidologo}
           alt="Bushido Logo"
-          className="absolute top-0 left-0 w-1/6 h-auto ml-2"
+          className="absolute top-0 left-0 w-1/3 xs:w-1/6 h-auto ml-2"
         ></img>
       </Link>
       <form
-        className="bg-secondary-600 bg-opacity-70 rounded w-1/3 h-full flex flex-col  text-white z-20"
+        className="bg-secondary-600 bg-opacity-70 rounded w-full md:w-1/2 lg:w-1/3 h-full mt-12 lg:mt-0 flex flex-col  text-white z-20"
         onSubmit={(e) => handleSubmit(e)}
       >
         <h2 className="font-custom text-white text-semibold text-4xl my-8 ml-4">
-          Sign Up
+          {t("sign_up")}
         </h2>
         <div className="flex flex-col justify-center items-center">
           <input
             type="text"
             id="username"
             name="username"
-            placeholder="Username"
+            placeholder={t("username")}
             required
             className="rounded bg-secondary-400 w-64 h-10 p-4 mb-4 "
             onChange={(e) => {
@@ -101,7 +102,7 @@ const SignPage = () => {
             type="password"
             id="password"
             name="password"
-            placeholder="Password"
+            placeholder={t("password")}
             required
             className="rounded bg-secondary-400 w-64 h-10 p-4"
             onChange={(e) => {
@@ -121,7 +122,15 @@ const SignPage = () => {
             />
           </div>
 
-          <button className="btn-primary w-2/3 h-12 mt-6">Sign Up</button>
+          <button className="btn-primary w-2/3 h-12 mt-6">
+            {loading ? (
+              <div className="flex justify-center">
+                <Loading stroke="#FFF" />
+              </div>
+            ) : (
+              t("sign_up")
+            )}
+          </button>
         </div>
 
         <p className=" text-gray-500 pt-4 text-center mt-4">
@@ -130,11 +139,7 @@ const SignPage = () => {
         </p>
       </form>
       {isOpen && (
-        <ChangePicModal
-          open={setIsOpen}
-          setPic={setProfilePic}
-          sign={true}
-        />
+        <ChangePicModal open={setIsOpen} setPic={setProfilePic} sign={true} />
       )}
     </div>
   );

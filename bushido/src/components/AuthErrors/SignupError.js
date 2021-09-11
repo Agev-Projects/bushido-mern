@@ -1,12 +1,15 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const SignupError = (props) => {
+  const { t } = useTranslation();
+
   if (props.error[props.type].includes("Error")) {
     let error = props.error[props.type];
     return (
       <div>
-        <p className="text-primary-400 text-semibold">
-          {error.replace("Error: ", "")}
+        <p className="text-primary-400 font-custom text-center border-t-2 border-primary-400 w-64">
+          {error.replace(error, `${t(`signup_error_${props.type}`)}`)}
         </p>
       </div>
     );
@@ -14,7 +17,7 @@ const SignupError = (props) => {
 
   return (
     <div>
-      <p className="text-primary-400 text-semibold"></p>
+      <p className="text-primary-400 w-0 "></p>
     </div>
   );
 };

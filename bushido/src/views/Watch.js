@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 import GET_ANIME_SLUG from "../graphql/Queries/getAnimeSlug.js";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import Loading from "../components/States/Loading";
 
 const Watch = () => {
   const { slug } = useParams();
@@ -13,7 +14,12 @@ const Watch = () => {
     variables: { slug },
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="centered-loader">
+        <Loading stroke="#EA2C59" />
+      </div>
+    );
   if (error) return <div>An Error has ocurred</div>;
 
   const animeData = data.anime_slug;

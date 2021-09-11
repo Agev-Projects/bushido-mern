@@ -39,7 +39,11 @@ const ChangePicModal = (props) => {
         className="fixed w-screen h-screen bg-black bg-opacity-60 z-30"
       ></div>
       <div
-        className={isSign ? `fixed transform translate-x-0 translate-y-0 shadow-lg-white bg-secondary-300 rounded-lg w-1/3 h-3/4 z-50` : `fixed transform translate-x-full translate-y-8 shadow-lg-white bg-secondary-300 rounded-lg w-1/3 h-3/4 z-50`}
+        className={
+          isSign
+            ? `fixed transform translate-x-0 translate-y-0 shadow-lg-white bg-secondary-300 rounded-lg w-full h-2/4 lg:w-1/3 lg:h-3/4 z-50`
+            : `fixed transform lg:translate-x-full md:translate-y-8 shadow-lg-white bg-secondary-300 rounded-lg w-full h-2/4 lg:w-1/3 lg:h-3/4 z-50`
+        }
       >
         <div className="flex justify-between p-4">
           <p className="text-primary-400 text-2xl font-custom">
@@ -51,7 +55,7 @@ const ChangePicModal = (props) => {
           />
         </div>
 
-        <div className="grid grid-cols-3 gap-8 p-4 auto-rows-fr">
+        <div className="grid grid-cols-3 gap-8 p-1 lg:p-4 auto-rows-fr">
           {IMAGES.map((image) => {
             return (
               <div

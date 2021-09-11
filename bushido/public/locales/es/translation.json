@@ -1,7 +1,10 @@
 {
   "welcome": "¡Tus Animes y Mangas favoritos en un solo lugar!",
   "register": "Regístrate Ahora",
+  "password": "Contraseña",
+  "username": "Usuario",
   "login": "Entrar",
+  "sign_up": "Registrarse",
   "welcome_enjoy": "Disfruta tus Animes favoritos desde tu TV!",
   "enjoy_sub": "Mira tus animes favoritos en tu Smart TV, Playstation, Xbox, Tablets, y mucho más en la más alta calidad posible",
   "welcome_read": "Lee tus Mangas favoritos en la mayor calidad!",
@@ -25,5 +28,10 @@
   "question_three": "¿Qué puedo ver o leer en Bushido?",
   "answer_one": "Bushido! es un servicio de streaming que posee una amplia variedad series anime, películas anime, mangas, novelas gráficas, y mucho más en miles de dispositivos conectados a internet.",
   "answer_two": "Ve donde quieras, a cualquier hora, en un ilimitado número de dispositivos. Incluyendo PC, smart TVs, smartphones, tablets, dispositivos de streaming y consolas de videojuegos.",
-  "answer_three": "Bushido! tiene una extensa librería de series anime, películas anime, mangas, novelas gráficas, Bushido! Originals, y más. Mira tanto como quieras, a la hora que quieras."
+  "answer_three": "Bushido! tiene una extensa librería de series anime, películas anime, mangas, novelas gráficas, Bushido! Originals, y más. Mira tanto como quieras, a la hora que quieras.",
+  "login_error_email": "Email incorrecto",
+  "login_error_password": "Contraseña incorrecta",
+  "signup_error_email": "El Email es inválido",
+  "signup_error_password": "La contraseña debe ser 6 caracteres mínimo",
+  "signup_error_username": "El Usuario debe ser 3 caracteres mínimo y 12 máximo"
 }
