@@ -10,9 +10,9 @@ const mangaResolver = {
     manga_search: (parent, { manga }, ctx) => {
       return Mangas.find()
         .or([
-          { "titles.en": manga },
-          { "titles.es": manga },
-          { "titles.pt": manga },
+          { "titles.en": { $regex: new RegExp(manga, "i") } },
+          { "titles.es": { $regex: new RegExp(manga, "i") } },
+          { "titles.pt": { $regex: new RegExp(manga, "i") } },
         ])
         .then((mangas) => {
           return mangas;

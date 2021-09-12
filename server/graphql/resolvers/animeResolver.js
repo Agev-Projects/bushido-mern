@@ -11,9 +11,9 @@ const animeResolver = {
     anime_search: (parent, { anime }, ctx) => {
       return Animes.find()
         .or([
-          { "titles.en": anime },
-          { "titles.es": anime },
-          { "titles.pt": anime },
+          { "titles.en": { $regex: new RegExp(anime, "i") } },
+          { "titles.es": { $regex: new RegExp(anime, "i") } },
+          { "titles.pt": { $regex: new RegExp(anime, "i") } },
         ])
         .then((animes) => {
           return animes;
