@@ -10,6 +10,8 @@ import GET_ANIMES from "../../graphql/Queries/getAnimes.js";
 import GET_MANGAS from "../../graphql/Queries/getMangas.js";
 import GET_ANIME_SEARCH from "../../graphql/Queries/getAnimeSearch.js";
 import GET_MANGA_SEARCH from "../../graphql/Queries/getMangaSearch.js";
+import GET_ANIME_GENRE from "../../graphql/Queries/getAnimeGenre.js";
+import GET_MANGA_GENRE from "../../graphql/Queries/getMangaGenre.js";
 
 import SearchIcon from "@material-ui/icons/Search";
 import Loading from "../States/Loading";
@@ -20,6 +22,7 @@ const HomeContent = (props) => {
   const { t } = useTranslation();
   const isAnime = props.content;
   const [search, setSearch] = useState(false);
+  const [searchByGenre, setSearchByGenre] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
   const handleClick_anime = () => {
@@ -39,12 +42,21 @@ const HomeContent = (props) => {
     setSearch(true);
   };
 
+  const handleSearchByGenre = (value) => {
+    if (value === "All") {
+      return setSearchByGenre(false);
+    }
+    setSearchValue(value);
+    setSearchByGenre(true);
+  };
+
   return (
     <main className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 auto-rows-auto justify-center gap-12 px-8 mb-6">
       <div className="hidden md:flex col-start-1 col-end-2 text-white items-end md:ml-0 lg:ml-12">
         <select
           name="genres"
           className="rounded w-32 h-8 bg-secondary-400 border-2 border-primary-400"
+          onChange={(e) => handleSearchByGenre(e.target.value)}
         >
           <option value="All">All</option>
           <option value="Action">Action</option>
@@ -67,8 +79,8 @@ const HomeContent = (props) => {
           Mangas
         </button>
       </div>
-
       <form
+        id="search"
         className="fixed top-5 z-50 right-0 sm:right-10 md:z-0 md:static flex md:col-start-3 md:col-end-4 lg:col-start-5 lg:col-end-6 mr-4 items-end lg:justify-end"
         onSubmit={(e) => handleSubmit(e)}
       >
@@ -85,9 +97,11 @@ const HomeContent = (props) => {
           <SearchIcon fontSize="small" />
         </button>
       </form>
+      {isAnime && !search && !searchByGenre && <AnimeContent />}
+      {!isAnime && !search && !searchByGenre && <MangaContent />}
 
-      {isAnime && !search && <AnimeContent />}
-      {!isAnime && !search && <MangaContent />}
+      {/* //Search by User Input */}
+
       {search && isAnime && (
         <SearchContent
           query={GET_ANIME_SEARCH}
@@ -106,6 +120,29 @@ const HomeContent = (props) => {
           searchContent={searchValue}
           setSearchContent={setSearchValue}
           type="manga_search"
+        />
+      )}
+
+      {/* //Search by Genre */}
+
+      {searchByGenre && isAnime && (
+        <SearchContent
+          query={GET_ANIME_GENRE}
+          content="genre"
+          search={setSearchByGenre}
+          searchContent={searchValue}
+          setSearchContent={setSearchValue}
+          type="anime_genre"
+        />
+      )}
+      {searchByGenre && !isAnime && (
+        <SearchContent
+          query={GET_MANGA_GENRE}
+          content="genre"
+          search={setSearchByGenre}
+          searchContent={searchValue}
+          setSearchContent={setSearchValue}
+          type="manga_genre"
         />
       )}
     </main>
