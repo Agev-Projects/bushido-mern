@@ -58,11 +58,25 @@ const HomeContent = (props) => {
           className="rounded w-32 h-8 bg-secondary-400 border-2 border-primary-400"
           onChange={(e) => handleSearchByGenre(e.target.value)}
         >
-          <option value="All">All</option>
-          <option value="Action">Action</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Shounen">Shounen</option>
-          <option value="Comedy">Comedy</option>
+          <option value="All">{t("genre_all")}</option>
+          <option value="Action">{t("genre_action")}</option>
+          <option value="Adventure">{t("genre_adventure")}</option>
+          <option value="Shounen">{t("genre_shounen")}</option>
+          <option value="Seinen">{t("genre_seinen")}</option>
+          <option value="Drama">{t("genre_drama")}</option>
+          <option value="School">{t("genre_school")}</option>
+          <option value="Psychological">{t("genre_psychological")}</option>
+          <option value="Fantasy">{t("genre_fantasy")}</option>
+          <option value="Comedy">{t("genre_comedy")}</option>
+          <option value="Superhero">{t("genre_superhero")}o</option>
+          <option value="Samurai">{t("genre_samurai")}</option>
+          <option value="Sci-fi">{t("genre_sci-fi")}</option>
+          <option value="Mecha">{t("genre_mecha")}</option>
+          <option value="Dark fantasy">{t("genre_darkfantasy")}</option>
+          <option value="Supernatural">{t("genre_supernatural")}</option>
+          {!isAnime && (
+            <option value="Martial Arts">{t("genre_martialarts")}</option>
+          )}
         </select>
       </div>
       <div className="col-start-1 col-end-3 md:col-start-2 md:col-end-3 lg:col-start-2 lg:col-end-5 py-8 flex items-start justify-center">

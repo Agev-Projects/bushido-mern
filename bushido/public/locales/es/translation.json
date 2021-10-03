@@ -33,5 +33,22 @@
   "login_error_password": "Contraseña incorrecta",
   "signup_error_email": "El Email es inválido",
   "signup_error_password": "La contraseña debe ser 6 caracteres mínimo",
-  "signup_error_username": "El Usuario debe ser 3 caracteres mínimo y 12 máximo"
+  "signup_error_username": "El Usuario debe ser 3 caracteres mínimo y 12 máximo",
+  "genre_all": "Todos",
+  "genre_action": "Acción",
+  "genre_adventure": "Aventura",
+  "genre_shounen": "Shounen",
+  "genre_seinen": "Seinen",
+  "genre_drama": "Drama",
+  "genre_school": "Escolar",
+  "genre_psychological": "Psicológico",
+  "genre_fantasy": "Fantasía",
+  "genre_comedy": "Comedia",
+  "genre_superhero": "Superhéroe",
+  "genre_samurai": "Samurái",
+  "genre_sci-fi": "Ciencia Ficción",
+  "genre_mecha": "Mecha",
+  "genre_darkfantasy": "Fantasía oscura",
+  "genre_supernatural": "Sobrenatural",
+  "genre_martialarts": "Artes Marciales"
 }
