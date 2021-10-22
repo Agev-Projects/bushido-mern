@@ -120,6 +120,7 @@ const HomeContent = (props) => {
         <SearchContent
           query={GET_ANIME_SEARCH}
           content="anime"
+          contentSlug="anime"
           search={setSearch}
           searchContent={searchValue}
           setSearchContent={setSearchValue}
@@ -130,6 +131,7 @@ const HomeContent = (props) => {
         <SearchContent
           query={GET_MANGA_SEARCH}
           content="manga"
+          contentSlug="manga"
           search={setSearch}
           searchContent={searchValue}
           setSearchContent={setSearchValue}
@@ -143,6 +145,7 @@ const HomeContent = (props) => {
         <SearchContent
           query={GET_ANIME_GENRE}
           content="genre"
+          contentSlug="anime"
           search={setSearchByGenre}
           searchContent={searchValue}
           setSearchContent={setSearchValue}
@@ -153,6 +156,7 @@ const HomeContent = (props) => {
         <SearchContent
           query={GET_MANGA_GENRE}
           content="genre"
+          contentSlug="manga"
           search={setSearchByGenre}
           searchContent={searchValue}
           setSearchContent={setSearchValue}

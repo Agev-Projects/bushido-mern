@@ -7,7 +7,14 @@ import Loading from "../States/Loading";
 
 const lang = cookies.get("i18next") || "en";
 
-const SearchContent = ({ query, content, search, searchContent, type }) => {
+const SearchContent = ({
+  query,
+  content,
+  contentSlug,
+  search,
+  searchContent,
+  type,
+}) => {
   const { loading, error, data } = useQuery(query, {
     variables: { [content]: searchContent },
   });
@@ -37,7 +44,7 @@ const SearchContent = ({ query, content, search, searchContent, type }) => {
   return searchData.map((data) => {
     return (
       <div key={data.slug} className="card">
-        <Link to={`/${content}/${data.slug}`}>
+        <Link to={`/${contentSlug}/${data.slug}`}>
           <img
             src={data.imageCover}
             alt={`${data.titles[lang]} Cover`}
